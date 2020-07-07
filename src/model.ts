@@ -2,6 +2,11 @@ export interface StatusCode {
   status: number;
 }
 
+export interface RequestResponse {
+  data: StatusCode;
+  status: number;
+}
+
 export interface Quizze {
   id?: string;
   teacherId: string;

@@ -4,6 +4,7 @@ import {
   Examination,
   StartExamination,
   AnswerSheet,
+  RequestResponse,
 } from './model';
 import { ExamService } from './exam.service';
 
@@ -15,21 +16,33 @@ export class AppService {
     return 'Hello World!';
   }
 
-  createExaminations(createExamParams: Examination): StatusCode {
-    return this.examService.createExaminations(createExamParams);
+  createExaminations(createExamParams: Examination): RequestResponse {
+    return this.examService
+      .createExaminations(createExamParams)
+      .then(result => {
+        return result;
+      });
   }
 
   startExam(
     examinationId: string,
     startExaminationParams: StartExamination,
-  ): StatusCode {
-    return this.examService.startExam(examinationId, startExaminationParams);
+  ): RequestResponse {
+    return this.examService
+      .startExam(examinationId, startExaminationParams)
+      .then(result => {
+        return result;
+      });
   }
 
   answerExam(
     examinationId: string,
     answerSheetParams: AnswerSheet,
-  ): StatusCode {
-    return this.examService.answerExam(examinationId, answerSheetParams);
+  ): RequestResponse {
+    return this.examService
+      .answerExam(examinationId, answerSheetParams)
+      .then(result => {
+        return result;
+      });
   }
 }

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common';
 import { AppService } from './app.service';
-import { StatusCode } from './model';
+import { RequestResponse } from './model';
 
 @Controller()
 export class AppController {
@@ -15,7 +15,7 @@ export class AppController {
     @Body('paperId') paperId: string,
     @Body('teacherId') teacherId: string,
     @Body('duration') duration: number,
-  ): StatusCode {
+  ): RequestResponse {
     return this.appService.createExaminations({
       paperId,
       teacherId,
@@ -27,7 +27,7 @@ export class AppController {
   startAnswerExaminations(
     @Param('examinationId') examinationId: string,
     @Body('studentId') studentId: string,
-  ): StatusCode {
+  ): RequestResponse {
     return this.appService.startExam(examinationId, {
       studentId,
     });
@@ -38,7 +38,7 @@ export class AppController {
     @Param('examinationId') examinationId: string,
     @Body('studentId') studentId: string,
     @Body('answers') answers: string[],
-  ): StatusCode {
+  ): RequestResponse {
     return this.appService.answerExam(examinationId, {
       answers,
       studentId,
