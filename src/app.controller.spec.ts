@@ -24,6 +24,29 @@ describe('AppController', () => {
       const result = await appController.createExaminations(
         '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
         '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
+        [
+          { id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl1', score: 5 },
+          {
+            id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl2',
+            score: 10,
+          },
+          {
+            id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl3',
+            score: 20,
+          },
+          {
+            id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl4',
+            score: 15,
+          },
+          {
+            id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl5',
+            score: 20,
+          },
+          {
+            id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl6',
+            score: 30,
+          },
+        ],
         120,
       );
       expect(result.data.status).toBe(201);
@@ -33,30 +56,64 @@ describe('AppController', () => {
       const result = await appController.startAnswerExaminations(
         '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
         '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
-      );
-      expect(result.data.status).toBe(201);
-    });
-
-    it('answer Examinations should return {status:201}', async () => {
-      const result = await appController.answerExaminations(
         '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
         '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
+        120,
         [
-          '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
-          '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
+          { id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl1', score: 5 },
+          {
+            id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl2',
+            score: 10,
+          },
+          {
+            id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl3',
+            score: 20,
+          },
+          {
+            id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl4',
+            score: 15,
+          },
+          {
+            id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl5',
+            score: 20,
+          },
+          {
+            id: '8jk4l-k0d9ie7-4jk89l-t88ijj6-h8ijsl6',
+            score: 30,
+          },
         ],
       );
       expect(result.data.status).toBe(201);
     });
 
-    it('answer Examinations should return {status:400} time expire', async () => {
+    it('answer Examinations time expire should return {status:400}', async () => {
       const result = await appController.answerExaminations(
-        'lokfu1-lokfu-jr874j3-h8d9j4-hor82kd7',
+        '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
+        '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
         '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
         [
           '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
           '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
+          '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
         ],
+        new Date(Date.now() - 1000 * 60 * 60 * 121).toDateString(),
+        new Date().toDateString(),
+      );
+      expect(result.data.status).toBe(400);
+    });
+
+    it('answer Examinations should return {status:210}', async () => {
+      const result = await appController.answerExaminations(
+        '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
+        '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
+        '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
+        [
+          '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
+          '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
+          '9idk4-lokfu-jr874j3-h8d9j4-hor82kd7',
+        ],
+        new Date(Date.now() - 1000 * 60 * 60 * 121).toDateString(),
+        new Date().toDateString(),
       );
       expect(result.data.status).toBe(400);
     });

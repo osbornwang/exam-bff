@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import {
-  StatusCode,
   Examination,
   StartExamination,
-  AnswerSheet,
+  AnswerSheetParams,
   RequestResponse,
 } from './model';
 import { ExamService } from './exam.service';
@@ -24,25 +23,15 @@ export class AppService {
       });
   }
 
-  startExam(
-    examinationId: string,
-    startExaminationParams: StartExamination,
-  ): RequestResponse {
-    return this.examService
-      .startExam(examinationId, startExaminationParams)
-      .then(result => {
-        return result;
-      });
+  startExam(startExaminationParams: StartExamination): RequestResponse {
+    return this.examService.startExam(startExaminationParams).then(result => {
+      return result;
+    });
   }
 
-  answerExam(
-    examinationId: string,
-    answerSheetParams: AnswerSheet,
-  ): RequestResponse {
-    return this.examService
-      .answerExam(examinationId, answerSheetParams)
-      .then(result => {
-        return result;
-      });
+  answerExam(answerSheetParams: AnswerSheetParams): RequestResponse {
+    return this.examService.answerExam(answerSheetParams).then(result => {
+      return result;
+    });
   }
 }
